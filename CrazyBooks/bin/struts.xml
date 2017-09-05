@@ -1,0 +1,127 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<package name="default" extends="struts-default,json-default">
+		<action name="index-*" class="indexAction" method="{1}">
+			<result name="mainPage">WEB-INF/jsp/mainPage.jsp</result>
+			<result name="success">WEB-INF/jsp/mainPage.jsp</result>
+		</action>
+		<!-- 对用户行为的操作，例如登录，注册等 -->
+		<action name="User*Action" class="com.crazybooks.action.UserAction"
+			method="{1}">
+			<result name="valiRegi" type="json">
+				<param name="root">result</param>
+			</result>
+			<result name="register" type="json">
+				<param name="root">result</param>
+			</result>
+			<result name="login" type="json">
+				<param name="root">result</param>
+			</result>
+			<result name="getUserInfo" type="json">
+				<param name="root">result</param>
+			</result>
+			<result name="userCollection" type="json">
+				<param name="root">result</param>
+			</result>
+			<result name="userComments" type="json">
+				<param name="root">result</param>
+			</result>
+			<result name="userBorrow" type="json">
+				<param name="root">result</param>
+			</result>
+			<result name="userConsume" type="json">
+				<param name="root">result</param>
+			</result>
+			<result name="addMoney" type="json">
+				<param name="root">result</param>
+			</result>
+			<result name="alterPass" type="json">
+				<param name="root">result</param>
+			</result>
+			<result name="userAlterInfo" type="json">
+				<param name="root">result</param>
+			</result>
+			<result name="insertSuccess">/WEB-INF/jsp/Success.jsp</result>
+			<result name="returnBook">/WEB-INF/html/UserInfo.html</result>
+			<result name="deleteUserSession" type="chain">
+				<param name="actionName">index-mainPage</param>
+			</result>
+			<result name="addCollection" type="json">
+				<param name="root">result</param>
+			</result>
+			<result name="deleteUserCollection" type="json">
+				<param name="root">result</param>
+			</result>
+		</action>
+		<!-- 对管理员的操作 -->
+		<action name="Admin*Action" class="com.crazybooks.action.AdminAction"
+			method="{1}">
+			<result name="AdminLogin" type="json">
+				<param name="root">result</param>
+			</result>
+			<result name="ViewUsers">/WEB-INF/jsp/Admin.jsp</result>
+			<result name="ViewUsersCondition">/WEB-INF/jsp/Admin.jsp</result>
+			<result name="ViewFreezeUsers">/WEB-INF/jsp/Admin.jsp</result>
+			<result name="freezeUser" type="redirectAction">
+				<param name="actionName">AdminViewUsersAction</param>
+				<param name="page">1</param>
+			</result>
+			<result name="unFreezeUser" type="redirectAction">
+				<param name="actionName">AdminViewFreezeUsersAction</param>
+				<param name="page">1</param>
+			</result>
+		</action>
+		<!-- 网站内jsp页面的跳转 -->
+		<action name="To*JspAction">
+			<result name="success">/WEB-INF/jsp/{1}.jsp</result>
+		</action>
+		<!-- 网站内html页面的跳转 -->
+		<action name="To*HtmlAction">
+			<result name="success">/WEB-INF/html/{1}.html</result>
+		</action>
+		<!-- 获取验证码 -->
+		<action name="RandomValidate" class="com.crazybooks.action.RandomValidateCodeAction">
+			<result type="stream">
+				<param name="contentType">image/jpeg</param>
+				<param name="inputName">bais</param>
+			</result>
+		</action>
+		<!-- 获取不同的session -->
+		<action name="SessionQuery" class="com.crazybooks.action.SessionQuery">
+			<result name="session" type="json">
+				<param name="root">result</param>
+			</result>
+		</action>
+		<action name="admin*" class="com.crazybooks.action.AdminAction"
+			method="{1}">
+			<result name="returnLogin">/WEB-INF/html/UserLogin.html</result>
+		</action>
+		<!-- 获取单个书籍信息 -->
+		<action name="SingleBook" class="com.crazybooks.action.SingleBookAction">
+
+		</action>
+		<!-- BookAction -->
+		<action name="book-*" class="bookAction" method="{1}">
+			<result name="addBook">/WEB-INF/jsp/addBook.jsp</result>
+			<result name="SingleBookInfo">WEB-INF/jsp/SingleBookInfo.jsp</result>
+			<result name="bookListPage">WEB-INF/jsp/bookListPage.jsp</result>
+			<result name="bookInfo" type="json">
+				<param name="root">result</param>
+			</result>
+			<result name="deleteBook">WEB-INF/jsp/deleteBooks.jsp</result>
+			<result name="comments" type="json">
+				<param name="root">result</param>
+			</result>
+		</action>
+		<action name="bookCart-*" class="bookCartAction" method="{1}">
+			<result name="bookCart">WEB-INF/jsp/BookCart.jsp</result>
+			<result name="login">/WEB-INF/html/UserLogin.html</result>
+		</action>
+		<action name="analyzeAction-*" class="dataAnalyzeAction"
+			method="{1}">
+			<result name="analyzeInfo">/WEB-INF/jsp/analyzeInfo.jsp</result>
+		</action>
+
+	</package>
+</struts>    

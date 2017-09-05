@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+	    <bean id="indexAction" class="com.crazybooks.action.IndexAction" scope="prototype">
+		<property name="categoryOneService" ref="categoryOneService"></property>
+		<property name="bookBizImpl" ref="bookService"></property>
+		</bean>
+		<bean id="categoryOneService" class="com.crazybooks.biz.impl.CategoryOneService">
+		<property name="categoryOneDao" ref="categoryOneDao"></property>
+		</bean>
+		<bean name="categoryOneDao" class="com.crazybooks.base.impl.CategoryOneImpl"></bean>
+		<bean id="bookAction" class="com.crazybooks.action.BookAction" scope="prototype"><property name="categoryTowService" ref="categorytowService"></property><property name="bookService" ref="bookService"></property></bean>
+		<bean id="bookService" class="com.crazybooks.biz.impl.BookBizImpl">
+		<property name="bookDao" ref="bookDao"></property>
+		</bean>
+		<bean id="categorytowService" class="com.crazybooks.biz.impl.CategoryTowService"><property name="categoryTowDao" ref="categorytowDao"></property></bean>
+		<bean id="bookDao" class="com.crazybooks.base.impl.BookDaoImpl"></bean>
+		<bean id="categorytowDao" class="com.crazybooks.base.impl.CategoryTowDao"></bean>
+		<bean id="bookCartAction" class="com.crazybooks.action.BookCartAction" scope="prototype">
+		<property name="bookService" ref="bookService"></property>
+		</bean>
+		<bean id="dataAnalyzeAction" scope="prototype" class="com.crazybooks.action.DataAnalyzeAction">
+		<property name="analyzeService" ref="dataAnalyzeService"></property>
+		</bean>
+		<bean id="dataAnalyzeService" class="com.crazybooks.biz.impl.DataAnalyzeService">
+		<property name="analyzeDao" ref="dataAnalyzeDao"></property>
+		</bean>
+		<bean id="dataAnalyzeDao" class="com.crazybooks.base.impl.DataAnalyzeDao"></bean>
+</beans>

@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<package name="default" extends="struts-default,json-default">
+		<!-- 对用户行为的操作，例如登录，注册等 -->
+		<action name="indexAction-*" class="indexAction" method="{1}">
+			<result name="mainPage">WEB-INF/jsp/mainPage.jsp</result>
+		</action>
+		<action name="User*Action" class="com.crazybooks.action.UserAction"
+			method="{1}">
+			<result name="valiRegi" type="json">
+				<param name="root">result</param>
+			</result>
+			<result name="register" type="json">
+				<param name="root">result</param>
+			</result>
+			<result name="login" type="json">
+				<param name="root">result</param>
+			</result>
+		</action>
+		<action name="To*JspAction">
+			<result name="success">/WEB-INF/jsp/{1}.jsp</result>
+		</action>
+		<action name="To*HtmlAction">
+			<result name="success">/WEB-INF/html/{1}.html</result>
+		</action>
+		<action name="validateCode" class="com.crazybooks.action.RandomValidateCodeAction">
+			<result name="success" type="stream">
+				<param name="contentType">image/jpeg</param>
+				<param name="inputName">bais</param>
+			</result>
+		</action>
+	</package>
+</struts>    
